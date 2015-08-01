@@ -1,0 +1,3 @@
+.row{margin-top:5px;}
+.footer{height: 50px;padding-top: 15px;color: #949494;}
+.footer a{color:#717171;}
