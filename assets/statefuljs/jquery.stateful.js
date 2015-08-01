@@ -1,3 +1,7 @@
+/*
+Developed by thambaru (thambaru.com) under MIT License.
+*/
+
 jQuery(document).ready(function($) {
     $('[data-loading-text]').click(function() {
         stateful($(this));
@@ -7,7 +11,7 @@ jQuery(document).ready(function($) {
 function stateful(loader) {
     var text = loader.attr('data-loading-text'),
         delay = loader.attr('data-loading-delay'),
-        value = loader.text();
+        value = loader.html();
     options = {
         text: text === '' ? 'Loading...' : text,
         delay: typeof delay === 'undefined' || delay === '' ? 3000 : delay,
@@ -17,7 +21,7 @@ function stateful(loader) {
 }
 
 function changeStates(loader, options) {
-    loader.attr('disabled', true).addClass('disabled').text(options.text).delay(options.delay).queue(function() {
-        loader.attr('disabled', false).removeClass('disabled').text(options.value).dequeue();
+    loader.attr('disabled', true).addClass('disabled').html(options.text).delay(options.delay).queue(function() {
+        loader.attr('disabled', false).removeClass('disabled').html(options.value).dequeue();
     });
 }
