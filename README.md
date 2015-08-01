@@ -16,6 +16,15 @@ All you have to do is to set `data-loading-text` to a prefered text or just leav
 
 Note: attribute `data-loading-text=""` is a must.
 
+From v1.1 you can set global parameters:
+
+* `text` (string) : Text to display on stateful
+* `delay` (string) : Time to hold stateful
+* `disabled` (boolean) : Disable gloabally if `true`
+
+within `$(document).stateful({`parameter:value`})`.
+
+
 ##Demo
 
 http://thambaru.github.io/statefuljs/
