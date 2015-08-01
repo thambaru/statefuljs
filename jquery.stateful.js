@@ -22,13 +22,17 @@ Developed by thambaru (thambaru.com) under MIT License.
     function stateful(loader) {
         var text = loader.attr('data-loading-text'),
             delay = loader.attr('data-loading-delay'),
-            value = loader.html();
-        attrs = {
-            text: text === '' ? '' : text,
-            delay: typeof delay === 'undefined' || delay === '' ? 3000 : delay,
-            value: value
-        };
-        var options = $.extend(attrs, opts);
+            value = loader.html(),
+            attrs = {
+                text: text === '' ? '' : text,
+                delay: typeof delay === 'undefined' || delay === '' ? 3000 : delay,
+                value: value
+            },
+            options = {
+                text: attrs.text === '' ? opts.text : attrs.text,
+                delay: attrs.delay === '' ? opts.delay : attrs.delay,
+                value: attrs.value
+            };
         if (!options.disabled)
             changeStates(loader, options);
     }
