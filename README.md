@@ -15,3 +15,7 @@ StatefulJS is published under MIT License and depends on jQuery which is to show
 All you have to do is to set `data-loading-text` to a prefered text or just leave blank to show default "Loading...". Delay of the toggle can be also set in milliseconds with `data-loading-delay` but it's optional with default 3000ms (3 secs).
 
 Note: attribute `data-loading-text=""` is a must.
+
+##Demo
+
+http://thambaru.github.io/statefuljs/
