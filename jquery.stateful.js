@@ -3,7 +3,8 @@ Developed by thambaru (thambaru.com) under MIT License.
 */
 
 (function($) {
-    var opts = new Object(),
+    var globalOptions = new Object(),
+        options = new Object(),
         defaults = {
             text: "Loading...",
             delay: 3000,
@@ -11,15 +12,20 @@ Developed by thambaru (thambaru.com) under MIT License.
         };
 
     $.fn.stateful = function(options) {
-        opts = $.extend(defaults, options);
+        globalOptions = $.extend(defaults, options);
+        return this;
+    };
+
+    $.fn.statefulReset = function() {
+        stop(this);
         return this;
     };
 
     $('[data-loading-text]').click(function() {
-        stateful($(this));
+        initiate($(this));
     });
 
-    function stateful(loader) {
+    function initiate(loader) {
         var text = loader.attr('data-loading-text'),
             delay = loader.attr('data-loading-delay'),
             value = loader.html(),
@@ -27,19 +33,29 @@ Developed by thambaru (thambaru.com) under MIT License.
                 text: text === '' ? '' : text,
                 delay: typeof delay === 'undefined' || delay === '' ? 3000 : delay,
                 value: value
-            },
-            options = {
-                text: attrs.text === '' ? opts.text : attrs.text,
-                delay: attrs.delay === '' ? opts.delay : attrs.delay,
-                value: attrs.value
             };
+        options = {
+            text: attrs.text === '' ? globalOptions.text : attrs.text,
+            delay: attrs.delay === '' ? globalOptions.delay : attrs.delay,
+            value: attrs.value
+        };
         if (!options.disabled)
-            changeStates(loader, options);
+            stateful(loader, options);
     }
 
-    function changeStates(loader, options) {
+    function stateful(loader, options) {
         loader.attr('disabled', true).addClass('disabled').html(options.text).delay(options.delay).queue(function() {
-            loader.attr('disabled', false).removeClass('disabled').html(options.value).dequeue();
+            reset(loader, options)
+            loader.dequeue();
         });
     }
+
+    function stop(loader) {
+        reset($(loader.selector), options);
+    }
+
+    function reset(loader, options) {
+        loader.attr('disabled', false).removeClass('disabled').html(options.value);
+    }
+
 }(jQuery));
