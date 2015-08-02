@@ -1,5 +1,5 @@
 /*
-Developed by thambaru (thambaru.com) under MIT License.
+Developed by thambaru <thambaru.com> under MIT License.
 */
 
 (function($) {
@@ -12,7 +12,13 @@ Developed by thambaru (thambaru.com) under MIT License.
         };
 
     $.fn.stateful = function(options) {
-        globalOptions = $.extend(defaults, options);
+        if (options === 'stop') {
+            stop(this);
+        } else if (typeof options === 'object') {
+            globalOptions = $.extend(defaults, options);
+        } else if (options !== 'stop' || typeof options !== 'undefined') {
+            throw 'statefulJS: Please check your options given.';
+        }
         return this;
     };
 
